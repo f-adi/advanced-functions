@@ -224,9 +224,9 @@ let newAnswer = poll.registerNewAnswer();
 // console.log(newAnswer);
 
 if (newAnswer < 4 && newAnswer >= 0) {
-  push;
+  poll.answers.splice(newAnswer, 1, +1);
 } else {
   alert(`Your answer was ${newAnswer}, please make sure it's between 0 and 4`);
 }
 //  poll.answers.push(newAnswer);
-// console.log(poll.answers);
+console.log(poll.answers);
