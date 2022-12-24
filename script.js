@@ -111,7 +111,6 @@ greet('Hello')(`Jonas`);
 let greetArrow = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArrow('Hi')(`Jonas`);
-*/
 
 const lufthansa = {
   airline: 'Lufthansa',
@@ -203,3 +202,25 @@ const addTaxRate = function (rate) {
 };
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
+
+*/
+const poll = {
+  question: `What is your favorite programming language`,
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    const promptAnswer = prompt(
+      this.question +
+        '\n' +
+        this.options.join('\n') +
+        '\n' +
+        '(Write Option Number)'
+    );
+    return promptAnswer;
+  },
+};
+
+let newAnswer = poll.registerNewAnswer();
+// console.log(newAnswer);
+poll.answers.push(newAnswer);
+console.log(poll.answers);
