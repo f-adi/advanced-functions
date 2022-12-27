@@ -204,29 +204,59 @@ const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
 
 */
+
 const poll = {
   question: `What is your favorite programming language`,
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   answers: new Array(4).fill(0),
   registerNewAnswer() {
-    const promptAnswer = prompt(
-      this.question +
-        '\n' +
-        this.options.join('\n') +
-        '\n' +
-        '(Write Option Number)'
+    //Get Answer
+    const answer = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write An Option Number)`
+      )
     );
-    return promptAnswer;
+    console.log(answer);
+    // Regster Answer
+    typeof answer === 'number' &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    this.displayResults();
+    this.displayResults('string');
+  },
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
 
-let newAnswer = poll.registerNewAnswer();
+poll.registerNewAnswer();
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6] }, 'string');
+
+//[5,2,3]
+//[1,5,3,9,6,1]
+
+// document.querySelector('.poll').addEventListener('click', function () {
+//   prompt(`That's a nice click bro!`);
+
+// let promptAnswer = poll.registerNewAnswer();
+// if (promptAnswer < 4 && promptAnswer >= 0) {
+//   // poll.answers.splice(newAnswer, 1, +1);
+//   poll.answers[promptAnswer] += 1;
+// } else {
+//   alert(`Your answer was ${prompt}, please make sure it's between 0 and 3`);
+// }
 // console.log(newAnswer);
 
-if (newAnswer < 4 && newAnswer >= 0) {
-  poll.answers.splice(newAnswer, 1, +1);
-} else {
-  alert(`Your answer was ${newAnswer}, please make sure it's between 0 and 4`);
-}
 //  poll.answers.push(newAnswer);
-console.log(poll.answers);
+// console.log(poll.answers);
